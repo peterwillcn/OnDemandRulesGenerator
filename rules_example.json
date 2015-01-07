@@ -1,0 +1,15 @@
+{
+  "Generic": {
+    "interface": "cellular",
+    "action": "ondemand",
+    "domains": [
+      "facebook.com", "twitter.com", "youtube.com"
+    ]
+  },
+  "Home": {
+    "interface": "wifi",
+    "ssid": "HomeWiFi",
+    "action": "disable",
+    "domains": []
+  }
+}
