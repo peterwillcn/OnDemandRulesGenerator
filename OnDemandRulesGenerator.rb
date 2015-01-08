@@ -21,7 +21,7 @@ def rules_generator filename
       if $supported_actions.include?(v["action"]) && $supported_interfaces.include?(v["interface"])
         dict = {}
         dict["ActionParameters"] = []
-
+        # detect INTERFACE_TYPE
         case v["action"]
         when "ondemand"
           dict["Action"] = "EvaluateConnection"
@@ -30,7 +30,7 @@ def rules_generator filename
         when "disable"
           dict["Action"] = "Disconnect"
         end
-        
+        # detect ACTION_TYPE
         case v["interface"]
         when "cellular"
           dict["InterfaceTypeMatch"] = "Cellular"
@@ -42,8 +42,8 @@ def rules_generator filename
             raise "SSID not included!"
           end
         end
-
-        dict["ActionParameters"] << { "DomainAction" => "ConnectIfNeeded", "Domains" => v["domains"] }
+        # add ActionParameters if "Action" is "EvaluateConnection"
+        dict["ActionParameters"] << { "DomainAction" => "ConnectIfNeeded", "Domains" => v["domains"] } if dict["Action"] == "EvaluateConnection"
         
         result << dict
       end
